@@ -64,4 +64,44 @@ final class SepseAppUITests: XCTestCase {
         XCTAssertTrue(app.tabBars.buttons["Protocolo"].exists)
         XCTAssertTrue(app.tabBars.buttons["Medicações"].exists)
     }
+
+    /// Fluxo: registrar um score e ver o histórico aparecer.
+    func testRegistrarScoreCriaHistorico() {
+        let app = XCUIApplication()
+        app.launch()
+
+        // Cria e abre um paciente.
+        let addButton = app.buttons["addPatient"]
+        XCTAssertTrue(addButton.waitForExistence(timeout: 20))
+        addButton.tap()
+        let nameField = app.textFields["patientName"]
+        XCTAssertTrue(nameField.waitForExistence(timeout: 20))
+        nameField.tap()
+        nameField.typeText("Paciente Score")
+        app.buttons["savePatient"].tap()
+
+        let cell = app.cells.firstMatch
+        XCTAssertTrue(cell.waitForExistence(timeout: 20))
+        cell.tap()
+
+        // Vai para a aba Scores.
+        let scoresTab = app.tabBars.buttons["Scores"]
+        XCTAssertTrue(scoresTab.waitForExistence(timeout: 20))
+        scoresTab.tap()
+
+        // Rola até o botão de registrar (fica abaixo do cartão de resultado) e toca.
+        let registrar = app.buttons["registrarScore"]
+        XCTAssertTrue(registrar.waitForExistence(timeout: 20))
+        var tentativas = 0
+        while !registrar.isHittable && tentativas < 8 {
+            app.swipeUp()
+            tentativas += 1
+        }
+        registrar.tap()
+
+        // O histórico passa a existir.
+        let pred = NSPredicate(format: "label CONTAINS[c] %@", "histórico")
+        XCTAssertTrue(app.staticTexts.matching(pred).firstMatch.waitForExistence(timeout: 15),
+                      "A seção 'Histórico' deveria aparecer após registrar o score.")
+    }
 }

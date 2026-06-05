@@ -104,5 +104,6 @@ struct RegistrarScoreButton: View {
         }
         .buttonStyle(.borderedProminent)
         .controlSize(.large)
+        .accessibilityIdentifier("registrarScore")
     }
 }

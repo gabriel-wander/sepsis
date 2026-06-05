@@ -35,6 +35,7 @@ struct PatientListView: View {
                     } label: {
                         Label("Adicionar paciente", systemImage: "plus")
                     }
+                    .accessibilityIdentifier("addPatient")
                 }
             }
             .sheet(isPresented: $mostrandoNovoPaciente) {

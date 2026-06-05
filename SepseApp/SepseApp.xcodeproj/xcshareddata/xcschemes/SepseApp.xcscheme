@@ -38,6 +38,16 @@
                ReferencedContainer = "container:SepseApp.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "A1000031"
+               BuildableName = "SepseAppUITests.xctest"
+               BlueprintName = "SepseAppUITests"
+               ReferencedContainer = "container:SepseApp.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

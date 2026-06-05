@@ -32,6 +32,7 @@ struct PatientFormView: View {
         Form {
             Section("Dados demográficos") {
                 TextField("Nome / Identificador", text: $paciente.nome)
+                    .accessibilityIdentifier("patientName")
                 Stepper("Idade: \(paciente.idade) anos", value: $paciente.idade, in: 0...120)
                 Picker("Sexo", selection: $paciente.sexo) {
                     ForEach(Sexo.allCases) { Text($0.rawValue).tag($0) }
@@ -123,6 +124,7 @@ struct PatientFormView: View {
             ToolbarItem(placement: .confirmationAction) {
                 Button("Salvar") { salvar() }
                     .disabled(paciente.nome.trimmingCharacters(in: .whitespaces).isEmpty)
+                    .accessibilityIdentifier("savePatient")
             }
         }
     }

@@ -9,6 +9,7 @@
 /* Begin PBXFileReference section */
 		A1000004 /* SepseApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SepseApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1000025 /* SepseAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SepseAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A1000035 /* SepseAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SepseAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -20,6 +21,11 @@
 		A1000020 /* SepseAppTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = SepseAppTests;
+			sourceTree = "<group>";
+		};
+		A1000030 /* SepseAppUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = SepseAppUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -39,6 +45,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A1000033 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -47,6 +60,7 @@
 			children = (
 				A1000002 /* SepseApp */,
 				A1000020 /* SepseAppTests */,
+				A1000030 /* SepseAppUITests */,
 				A1000003 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -56,6 +70,7 @@
 			children = (
 				A1000004 /* SepseApp.app */,
 				A1000025 /* SepseAppTests.xctest */,
+				A1000035 /* SepseAppUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -104,6 +119,27 @@
 			productReference = A1000025 /* SepseAppTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		A1000031 /* SepseAppUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A1000038 /* Build configuration list for PBXNativeTarget "SepseAppUITests" */;
+			buildPhases = (
+				A1000032 /* Sources */,
+				A1000033 /* Frameworks */,
+				A1000034 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A1000036 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				A1000030 /* SepseAppUITests */,
+			);
+			name = SepseAppUITests;
+			productName = SepseAppUITests;
+			productReference = A1000035 /* SepseAppUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -118,6 +154,10 @@
 						CreatedOnToolsVersion = 16.0;
 					};
 					A1000021 = {
+						CreatedOnToolsVersion = 16.0;
+						TestTargetID = A1000005;
+					};
+					A1000031 = {
 						CreatedOnToolsVersion = 16.0;
 						TestTargetID = A1000005;
 					};
@@ -140,6 +180,7 @@
 			targets = (
 				A1000005 /* SepseApp */,
 				A1000021 /* SepseAppTests */,
+				A1000031 /* SepseAppUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -159,10 +200,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A1000034 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		A1000022 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A1000032 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -186,6 +241,13 @@
 			remoteGlobalIDString = A1000005;
 			remoteInfo = SepseApp;
 		};
+		A1000037 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A1000000 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A1000005;
+			remoteInfo = SepseApp;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXTargetDependency section */
@@ -193,6 +255,11 @@
 			isa = PBXTargetDependency;
 			target = A1000005 /* SepseApp */;
 			targetProxy = A1000027 /* PBXContainerItemProxy */;
+		};
+		A1000036 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A1000005 /* SepseApp */;
+			targetProxy = A1000037 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -412,6 +479,42 @@
 			};
 			name = Release;
 		};
+		A1000039 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sepseapp.SepseAppUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = SepseApp;
+			};
+			name = Debug;
+		};
+		A100003A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sepseapp.SepseAppUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = SepseApp;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -438,6 +541,15 @@
 			buildConfigurations = (
 				A1000029 /* Debug */,
 				A100002A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A1000038 /* Build configuration list for PBXNativeTarget "SepseAppUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A1000039 /* Debug */,
+				A100003A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

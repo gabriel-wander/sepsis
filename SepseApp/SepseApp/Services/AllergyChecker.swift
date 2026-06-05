@@ -2,7 +2,7 @@ import Foundation
 
 /// Cross-check entre as alergias por classe do paciente e os antimicrobianos/regimes.
 enum AllergyChecker {
-    enum Nivel {
+    enum Nivel: Equatable {
         case conflito   // alergia direta à classe do fármaco
         case cautela    // reatividade cruzada possível (penicilina ↔ cefalosporina/carbapenêmico)
     }

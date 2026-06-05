@@ -8,6 +8,7 @@
 
 /* Begin PBXFileReference section */
 		A1000004 /* SepseApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SepseApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A1000025 /* SepseAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SepseAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -16,10 +17,22 @@
 			path = SepseApp;
 			sourceTree = "<group>";
 		};
+		A1000020 /* SepseAppTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = SepseAppTests;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		A1000007 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A1000023 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -33,6 +46,7 @@
 			isa = PBXGroup;
 			children = (
 				A1000002 /* SepseApp */,
+				A1000020 /* SepseAppTests */,
 				A1000003 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -41,6 +55,7 @@
 			isa = PBXGroup;
 			children = (
 				A1000004 /* SepseApp.app */,
+				A1000025 /* SepseAppTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -68,6 +83,27 @@
 			productReference = A1000004 /* SepseApp.app */;
 			productType = "com.apple.product-type.application";
 		};
+		A1000021 /* SepseAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A1000028 /* Build configuration list for PBXNativeTarget "SepseAppTests" */;
+			buildPhases = (
+				A1000022 /* Sources */,
+				A1000023 /* Frameworks */,
+				A1000024 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A1000026 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				A1000020 /* SepseAppTests */,
+			);
+			name = SepseAppTests;
+			productName = SepseAppTests;
+			productReference = A1000025 /* SepseAppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -80,6 +116,10 @@
 				TargetAttributes = {
 					A1000005 = {
 						CreatedOnToolsVersion = 16.0;
+					};
+					A1000021 = {
+						CreatedOnToolsVersion = 16.0;
+						TestTargetID = A1000005;
 					};
 				};
 			};
@@ -99,6 +139,7 @@
 			projectRoot = "";
 			targets = (
 				A1000005 /* SepseApp */,
+				A1000021 /* SepseAppTests */,
 			);
 		};
 /* End PBXProject section */
@@ -111,9 +152,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A1000024 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		A1000022 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A1000006 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -122,6 +177,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXContainerItemProxy section */
+		A1000027 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A1000000 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A1000005;
+			remoteInfo = SepseApp;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXTargetDependency section */
+		A1000026 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A1000005 /* SepseApp */;
+			targetProxy = A1000027 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		A1000010 /* Debug */ = {
@@ -299,6 +372,46 @@
 			};
 			name = Release;
 		};
+		A1000029 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sepseapp.SepseAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SepseApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/SepseApp";
+			};
+			name = Debug;
+		};
+		A100002A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sepseapp.SepseAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SepseApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/SepseApp";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -316,6 +429,15 @@
 			buildConfigurations = (
 				A1000013 /* Debug */,
 				A1000014 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A1000028 /* Build configuration list for PBXNativeTarget "SepseAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A1000029 /* Debug */,
+				A100002A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

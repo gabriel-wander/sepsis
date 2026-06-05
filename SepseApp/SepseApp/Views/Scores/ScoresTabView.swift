@@ -100,7 +100,9 @@ struct RegistrarScoreButton: View {
         } label: {
             Label("Registrar resultado no histórico", systemImage: "square.and.arrow.down")
                 .frame(maxWidth: .infinity)
+                .padding(.vertical, 4)
         }
         .buttonStyle(.borderedProminent)
+        .controlSize(.large)
     }
 }

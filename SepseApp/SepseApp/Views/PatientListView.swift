@@ -54,7 +54,8 @@ struct PatientRow: View {
     var body: some View {
         HStack(spacing: 12) {
             SeverityDot(gravidade: paciente.gravidade, diametro: 16)
-            VStack(alignment: .leading, spacing: 2) {
+                .accessibilityHidden(true)
+            VStack(alignment: .leading, spacing: 4) {
                 Text(paciente.nome.isEmpty ? "Sem identificação" : paciente.nome)
                     .font(.headline)
                 HStack(spacing: 6) {
@@ -69,10 +70,13 @@ struct PatientRow: View {
                 }
                 .font(.caption)
                 .foregroundColor(.secondary)
+                .fixedSize(horizontal: false, vertical: true)
             }
             Spacer()
+            GravidadeBadge(gravidade: paciente.gravidade, compacto: true)
         }
-        .padding(.vertical, 2)
+        .padding(.vertical, 4)
+        .accessibilityElement(children: .combine)
     }
 }
 

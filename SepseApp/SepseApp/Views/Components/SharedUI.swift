@@ -39,20 +39,51 @@ struct SeverityDot: View {
     }
 }
 
+/// Indicador de gravidade com texto (não depende apenas da cor — seguro para daltônicos
+/// e legível por VoiceOver).
+struct GravidadeBadge: View {
+    let gravidade: GravidadeCor
+    var compacto: Bool = false
+
+    var body: some View {
+        HStack(spacing: 6) {
+            Circle().fill(gravidade.cor).frame(width: 10, height: 10)
+            Text(gravidade.rotulo)
+                .font(compacto ? .caption2 : .caption)
+                .foregroundColor(gravidade.cor)
+        }
+        .padding(.horizontal, compacto ? 6 : 8)
+        .padding(.vertical, compacto ? 2 : 4)
+        .background(gravidade.cor.opacity(0.12))
+        .clipShape(Capsule())
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("Gravidade: \(gravidade.rotulo)")
+    }
+}
+
 // MARK: - Cartão de resultado de score
 
 struct ScoreResultCard: View {
     let titulo: String
     let resultado: ScoreResult
 
+    /// Tamanho do número escala com o Dynamic Type do usuário.
+    @ScaledMetric(relativeTo: .largeTitle) private var numeroSize: CGFloat = 34
+
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            HStack {
-                Text(titulo).font(.headline)
+            HStack(alignment: .firstTextBaseline) {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(titulo).font(.headline)
+                    GravidadeBadge(gravidade: resultado.gravidade)
+                }
                 Spacer()
                 Text("\(resultado.total)")
-                    .font(.system(size: 34, weight: .bold, design: .rounded))
+                    .font(.system(size: numeroSize, weight: .bold, design: .rounded))
                     .foregroundColor(resultado.gravidade.cor)
+                    .minimumScaleFactor(0.6)
+                    .lineLimit(1)
+                    .accessibilityLabel("Pontuação \(resultado.total), \(resultado.gravidade.rotulo)")
             }
             Text(resultado.interpretacao)
                 .font(.subheadline)
@@ -65,11 +96,13 @@ struct ScoreResultCard: View {
                     HStack {
                         Text(resultado.componentes[i].0)
                             .font(.caption)
+                            .fixedSize(horizontal: false, vertical: true)
                         Spacer()
                         Text("\(resultado.componentes[i].1)")
                             .font(.caption.monospacedDigit())
                             .foregroundColor(resultado.componentes[i].1 > 0 ? resultado.gravidade.cor : .secondary)
                     }
+                    .accessibilityElement(children: .combine)
                 }
             }
         }
@@ -126,9 +159,18 @@ struct AlertCard: View {
         }
     }
 
+    private var severidadeTexto: String {
+        switch alerta.severidade {
+        case .critico: return "Crítico"
+        case .atencao: return "Atenção"
+        case .info: return "Informação"
+        }
+    }
+
     var body: some View {
         HStack(alignment: .top, spacing: 10) {
             Image(systemName: simbolo).foregroundColor(cor)
+                .accessibilityHidden(true)
             VStack(alignment: .leading, spacing: 2) {
                 Text(alerta.titulo).font(.subheadline.bold())
                 Text(alerta.mensagem).font(.caption).foregroundColor(.secondary)
@@ -139,6 +181,8 @@ struct AlertCard: View {
         .padding(10)
         .background(cor.opacity(0.12))
         .clipShape(RoundedRectangle(cornerRadius: 10))
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("\(severidadeTexto): \(alerta.titulo). \(alerta.mensagem)")
     }
 }
 

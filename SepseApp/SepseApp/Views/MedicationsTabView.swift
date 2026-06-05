@@ -30,7 +30,9 @@ struct MedicationsTabView: View {
                     } else {
                         ForEach(store.regimes) { reg in
                             Button { editandoRegime = reg } label: {
-                                RegimeRow(regime: reg, destaque: relevante(reg))
+                                RegimeRow(regime: reg,
+                                          destaque: relevante(reg),
+                                          alergia: paciente.flatMap { AllergyChecker.avaliar(regime: reg, paciente: $0) })
                             }
                         }
                         .onDelete { store.removerRegimes(at: $0) }
@@ -96,6 +98,7 @@ struct MedicationsTabView: View {
 struct RegimeRow: View {
     let regime: EmpiricRegimen
     let destaque: Bool
+    var alergia: AllergyChecker.Resultado? = nil
 
     var body: some View {
         VStack(alignment: .leading, spacing: 3) {
@@ -113,6 +116,11 @@ struct RegimeRow: View {
             Text(regime.regime).font(.caption).foregroundColor(.secondary)
             if !regime.observacao.isEmpty {
                 Text(regime.observacao).font(.caption2).foregroundColor(.secondary)
+            }
+            if let alergia {
+                Label(alergia.mensagem, systemImage: alergia.nivel == .conflito ? "xmark.octagon.fill" : "exclamationmark.triangle.fill")
+                    .font(.caption2)
+                    .foregroundColor(alergia.nivel == .conflito ? .red : .orange)
             }
         }
         .padding(.vertical, 2)
@@ -181,6 +189,14 @@ struct AntimicrobialDetailView: View {
     var body: some View {
         List {
             Section { DisclaimerBanner() }
+            if let p = paciente, let alergia = AllergyChecker.avaliar(antimicrobiano: antimicrobiano, paciente: p) {
+                Section {
+                    Label(alergia.mensagem,
+                          systemImage: alergia.nivel == .conflito ? "xmark.octagon.fill" : "exclamationmark.triangle.fill")
+                        .font(.subheadline)
+                        .foregroundColor(alergia.nivel == .conflito ? .red : .orange)
+                }
+            }
             Section("Espectro") { Text(antimicrobiano.espectro) }
             Section("Dose usual") {
                 Text(antimicrobiano.doseUsual)

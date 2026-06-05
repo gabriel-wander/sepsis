@@ -14,6 +14,8 @@ struct Antimicrobial: Identifiable, Codable, Equatable {
     /// Indica se a dose deve ser calculada por peso (mg/kg).
     var dosePorPeso: Bool = false
     var mgPorKg: Double? = nil
+    /// Classes alergênicas às quais o fármaco pertence (para cross-check de alergia).
+    var classesAlergenicas: [ClasseAntibiotico] = []
 }
 
 /// Regime empírico **editável** por foco/contexto da infecção.

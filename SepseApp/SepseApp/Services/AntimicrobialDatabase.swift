@@ -11,7 +11,8 @@ enum AntimicrobialDatabase {
             doseUsual: "1–2 g IV 24/24h",
             ajusteRenal: "Não requer ajuste por função renal.",
             contraindicacoes: "Alergia a betalactâmicos. Cautela em neonatos com hiperbilirrubinemia.",
-            interacoes: "Soluções com cálcio IV (precipitação) em neonatos."
+            interacoes: "Soluções com cálcio IV (precipitação) em neonatos.",
+            classesAlergenicas: [.betalactamico, .cefalosporina]
         ),
         Antimicrobial(
             nome: "Piperacilina-tazobactam",
@@ -20,7 +21,8 @@ enum AntimicrobialDatabase {
             doseUsual: "4,5 g IV 6/6h",
             ajusteRenal: "ClCr 20–40: 3,375 g 6/6h. ClCr <20: 2,25 g 6/6h.",
             contraindicacoes: "Alergia a betalactâmicos.",
-            interacoes: "Risco de nefrotoxicidade com vancomicina; prolonga bloqueio neuromuscular."
+            interacoes: "Risco de nefrotoxicidade com vancomicina; prolonga bloqueio neuromuscular.",
+            classesAlergenicas: [.betalactamico, .penicilina]
         ),
         Antimicrobial(
             nome: "Meropenem",
@@ -29,7 +31,8 @@ enum AntimicrobialDatabase {
             doseUsual: "1 g IV 8/8h",
             ajusteRenal: "ClCr 25–50: 1 g 12/12h. ClCr 10–25: 0,5 g 12/12h. ClCr <10: 0,5 g 24/24h.",
             contraindicacoes: "Alergia a carbapenêmicos.",
-            interacoes: "Reduz níveis de valproato (risco de convulsões)."
+            interacoes: "Reduz níveis de valproato (risco de convulsões).",
+            classesAlergenicas: [.betalactamico, .carbapenemico]
         ),
         Antimicrobial(
             nome: "Vancomicina",
@@ -40,7 +43,8 @@ enum AntimicrobialDatabase {
             contraindicacoes: "Hipersensibilidade. Cautela em nefropatas.",
             interacoes: "Nefrotoxicidade aditiva com aminoglicosídeos/piperacilina-tazobactam.",
             dosePorPeso: true,
-            mgPorKg: 17.5
+            mgPorKg: 17.5,
+            classesAlergenicas: [.glicopeptideo]
         ),
         Antimicrobial(
             nome: "Cefepima",
@@ -49,7 +53,8 @@ enum AntimicrobialDatabase {
             doseUsual: "2 g IV 8/8h",
             ajusteRenal: "ClCr 30–60: 2 g 12/12h. ClCr 11–29: 2 g 24/24h.",
             contraindicacoes: "Alergia a betalactâmicos. Risco de neurotoxicidade em DRC.",
-            interacoes: "Neurotoxicidade aumentada em insuficiência renal não ajustada."
+            interacoes: "Neurotoxicidade aumentada em insuficiência renal não ajustada.",
+            classesAlergenicas: [.betalactamico, .cefalosporina]
         ),
         Antimicrobial(
             nome: "Azitromicina",
@@ -58,7 +63,8 @@ enum AntimicrobialDatabase {
             doseUsual: "500 mg IV/VO 24/24h",
             ajusteRenal: "Não requer ajuste renal.",
             contraindicacoes: "Hipersensibilidade a macrolídeos. Cautela em QT longo.",
-            interacoes: "Prolongamento do intervalo QT com outros fármacos QT-prolongadores."
+            interacoes: "Prolongamento do intervalo QT com outros fármacos QT-prolongadores.",
+            classesAlergenicas: [.macrolideo]
         ),
         Antimicrobial(
             nome: "Ciprofloxacino",
@@ -67,7 +73,8 @@ enum AntimicrobialDatabase {
             doseUsual: "400 mg IV 12/12h",
             ajusteRenal: "ClCr 30–50: 400 mg 12/12h. ClCr 5–29: 400 mg 24/24h.",
             contraindicacoes: "História de tendinopatia por quinolonas; cautela em QT longo.",
-            interacoes: "Quelação com cátions (Ca, Mg, Fe); aumenta efeito de tizanidina/teofilina."
+            interacoes: "Quelação com cátions (Ca, Mg, Fe); aumenta efeito de tizanidina/teofilina.",
+            classesAlergenicas: [.fluoroquinolona]
         ),
         Antimicrobial(
             nome: "Metronidazol",
@@ -76,7 +83,8 @@ enum AntimicrobialDatabase {
             doseUsual: "500 mg IV 8/8h",
             ajusteRenal: "Sem ajuste renal; reduzir em insuficiência hepática grave.",
             contraindicacoes: "Primeiro trimestre de gestação (relativo).",
-            interacoes: "Efeito dissulfiram-símile com álcool; potencializa varfarina."
+            interacoes: "Efeito dissulfiram-símile com álcool; potencializa varfarina.",
+            classesAlergenicas: [.nitroimidazol]
         )
     ]
 

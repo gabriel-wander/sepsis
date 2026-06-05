@@ -77,6 +77,10 @@ struct ProfileTabView: View {
                     })) {
                     ForEach(ProbabilidadeInfeccao.allCases) { Text($0.rawValue).tag($0) }
                 }
+                if let sugestao = ClassificationAdvisor.sugestao(para: paciente) {
+                    Label(sugestao, systemImage: "lightbulb")
+                        .font(.caption).foregroundColor(.accentColor)
+                }
             } header: {
                 Text("Classificação clínica")
             } footer: {
@@ -118,8 +122,16 @@ struct ProfileTabView: View {
                 }
             }
 
-            if !paciente.alergias.trimmingCharacters(in: .whitespaces).isEmpty {
-                Section("Alergias") { Text(paciente.alergias) }
+            if !paciente.alergias.trimmingCharacters(in: .whitespaces).isEmpty || !paciente.alergiasClasses.isEmpty {
+                Section("Alergias") {
+                    if !paciente.alergias.trimmingCharacters(in: .whitespaces).isEmpty {
+                        Text(paciente.alergias)
+                    }
+                    ForEach(paciente.alergiasClasses.sorted { $0.rawValue < $1.rawValue }) { classe in
+                        Label(classe.rawValue, systemImage: "allergens")
+                            .foregroundColor(.red)
+                    }
+                }
             }
 
             Section("Laboratório basal") {
@@ -134,6 +146,10 @@ struct ProfileTabView: View {
                 }
                 if !paciente.transaminases.isEmpty {
                     LabeledContent("Transaminases", value: paciente.transaminases)
+                }
+                if let lac = paciente.lactato {
+                    LabeledContent("Lactato", value: String(format: "%.1f mmol/L", lac))
+                        .foregroundColor(lac > 2 ? .orange : .primary)
                 }
             }
         }

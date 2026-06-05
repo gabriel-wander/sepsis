@@ -112,6 +112,11 @@ struct MEDSForm: View {
     private var resultado: ScoreResult { MEDSCalculator.calcular(input) }
 
     var body: some View {
+        Section {
+            Label("MEDS adaptado: usa as variáveis do protocolo deste app (inclui lactato e origem hospitalar). NÃO é o MEDS validado original (que pontua doença terminal). Interprete a categoria de risco com cautela.",
+                  systemImage: "info.circle")
+                .font(.caption).foregroundColor(.secondary)
+        }
         Section("Critérios") {
             Toggle("Idade > 65 anos", isOn: $input.idadeMaior65)
             Toggle("Bandas > 5%", isOn: $input.bandasMaior5)

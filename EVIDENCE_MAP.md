@@ -25,6 +25,20 @@
 | 11 | Desescalonamento | Reavaliar em 48–72 h com culturas; desescalonar; reavaliar vasopressores e corticoide. | SSC 2021 | Forte (desescalonamento) | Ajuste por antibiograma local. | Sim |
 | 12 | Disclaimer de conduta | Todas as telas de conduta exibem: *"Apoio à decisão. Confirmar com julgamento clínico, protocolos locais e equipe assistente."* | Política do app | — | Banner não dispensável nas telas de conduta. | Não |
 
+## Atualizações pós-auditoria clínica
+
+| Achado da auditoria | Correção aplicada | Fonte |
+|---|---|---|
+| qSOFA baixo + NEWS alto não gerava alerta | Alerta automático **NEWS ≥ 5** (atenção) e **≥ 7** (crítico) | SSC 2021; RCP NEWS |
+| Lactato sem valor numérico | Campo **lactato (mmol/L)** com alertas > 2 (hipoperfusão) e > 4 (grave); alimenta sugestão de classificação | SSC 2021; Sepsis-3 |
+| Sem cross-check de alergia | **AllergyChecker** cruza alergia por classe × antimicrobiano/regime (conflito direto + reatividade cruzada penicilina↔cefalosporina/carbapenêmico) | Boas práticas; SSC 2021 |
+| Classificação 100% manual | **ClassificationAdvisor** sugere (não decide) sepse (ΔSOFA≥2) e choque (vasopressor + lactato>2) | Sepsis-3 |
+| SIRS com Tª > 38,5 °C | Ajustado para **> 38,0 °C** (critério clássico) | SIRS clássico (ACCP/SCCM 1992) |
+| MEDS adaptado confundível | Rótulo na interface: "MEDS adaptado — não é o MEDS validado original" | Shapiro 2003 (referência do original) |
+
+> Nota: o cross-check de alergia e o `ClassificationAdvisor` são **camadas de apoio** — não bloqueiam
+> nem prescrevem. A decisão final é sempre do médico, com protocolo local e equipe assistente.
+
 ## Pontos que dependem de protocolo local (resumo)
 - Seleção de antimicrobiano empírico (CCIH, antibiograma, foco, alergias, função renal/hepática, MRSA/MDR/fungo).
 - Definição clínica de "probabilidade de infecção/sepse".

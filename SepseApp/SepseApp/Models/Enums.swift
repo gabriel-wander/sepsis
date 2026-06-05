@@ -82,6 +82,22 @@ enum OrganismoMDR: String, Codable, CaseIterable, Identifiable {
     var id: String { rawValue }
 }
 
+// MARK: - Classes de antimicrobianos (para cross-check de alergia)
+
+enum ClasseAntibiotico: String, Codable, CaseIterable, Identifiable {
+    case betalactamico = "Beta-lactâmicos (geral)"
+    case penicilina = "Penicilinas"
+    case cefalosporina = "Cefalosporinas"
+    case carbapenemico = "Carbapenêmicos"
+    case glicopeptideo = "Glicopeptídeos (vancomicina)"
+    case fluoroquinolona = "Fluoroquinolonas"
+    case macrolideo = "Macrolídeos"
+    case sulfa = "Sulfas"
+    case nitroimidazol = "Nitroimidazol (metronidazol)"
+
+    var id: String { rawValue }
+}
+
 // MARK: - Classificação clínica (Sepsis-3)
 
 enum ClassificacaoClinica: String, Codable, CaseIterable, Identifiable {

@@ -37,6 +37,15 @@ enum AlertService {
     static func alertas(para paciente: Patient, agora: Date = Date()) -> [ClinicalAlert] {
         var lista: [ClinicalAlert] = []
 
+        // Alergia a antimicrobiano (lembrete permanente)
+        if !paciente.alergiasClasses.isEmpty {
+            let nomes = paciente.alergiasClasses.map { $0.rawValue }.sorted().joined(separator: ", ")
+            lista.append(ClinicalAlert(
+                titulo: "Alergia a antibiótico",
+                mensagem: "Alergia registrada: \(nomes). Verifique conflitos ao escolher o antimicrobiano.",
+                severidade: .atencao))
+        }
+
         // qSOFA ≥ 2
         if let q = paciente.ultimaMedicao(de: .qsofa), q.total >= 2 {
             lista.append(ClinicalAlert(
@@ -53,12 +62,39 @@ enum AlertService {
                 severidade: s.gravidade == .vermelho ? .critico : .atencao))
         }
 
-        // Lactato elevado (evento registrado com valor no detalhe)
-        if let lactato = paciente.eventos.last(where: { $0.tipo == .lactato }) {
+        // NEWS: deterioração clínica (triagem priorizada fora da UTI).
+        if let n = paciente.ultimaMedicao(de: .news) {
+            if n.total >= 7 {
+                lista.append(ClinicalAlert(
+                    titulo: "NEWS ≥ 7",
+                    mensagem: "Risco alto de deterioração. Resposta de emergência e avaliação por terapia intensiva.",
+                    severidade: .critico))
+            } else if n.total >= 5 {
+                lista.append(ClinicalAlert(
+                    titulo: "NEWS 5–6",
+                    mensagem: "Risco aumentado. Avaliação clínica urgente. Lembrar: qSOFA negativo não exclui sepse.",
+                    severidade: .atencao))
+            }
+        }
+
+        // Lactato (valor numérico) — hipoperfusão.
+        if let lac = paciente.lactato {
+            if lac > 4 {
+                lista.append(ClinicalAlert(
+                    titulo: "Lactato > 4 mmol/L",
+                    mensagem: "Hipoperfusão grave. Ressuscitar e repetir lactato. Isoladamente NÃO define choque (que exige vasopressor após volume).",
+                    severidade: .critico))
+            } else if lac > 2 {
+                lista.append(ClinicalAlert(
+                    titulo: "Lactato 2–4 mmol/L",
+                    mensagem: "Hipoperfusão. Repetir lactato e reavaliar perfusão (enchimento capilar, débito urinário).",
+                    severidade: .atencao))
+            }
+        } else if paciente.eventos.contains(where: { $0.tipo == .lactato }) {
             lista.append(ClinicalAlert(
-                titulo: "Lactato registrado",
-                mensagem: "Repetir lactato se inicialmente elevado (> 2 mmol/L). \(lactato.detalhe)",
-                severidade: .atencao))
+                titulo: "Registrar valor do lactato",
+                mensagem: "Coleta de lactato registrada sem valor numérico. Informe o lactato (mmol/L) no perfil para avaliação automática.",
+                severidade: .info))
         }
 
         // Lembrete de antibiótico — janela conforme probabilidade e gravidade (SSC 2021)

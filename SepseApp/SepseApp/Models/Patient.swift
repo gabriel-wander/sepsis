@@ -20,11 +20,14 @@ struct Patient: Identifiable, Codable, Equatable {
     var antibioticosRecentes: String = ""
     var colonizacaoMDR: Set<OrganismoMDR> = []
     var alergias: String = ""
+    /// Classes de antimicrobianos às quais o paciente é alérgico (cross-check estruturado).
+    var alergiasClasses: Set<ClasseAntibiotico> = []
     var localAquisicao: LocalAquisicao = .comunidade
     var creatininaSerica: Double? = nil          // mg/dL
     var clearanceEstimado: Double? = nil         // mL/min (Cockcroft-Gault)
     var bilirrubinas: Double? = nil              // mg/dL
     var transaminases: String = ""               // texto livre (TGO/TGP)
+    var lactato: Double? = nil                   // mmol/L (último valor)
 
     // MARK: Localização atual
     var ambiente: AmbienteAtendimento = .prontoSocorro

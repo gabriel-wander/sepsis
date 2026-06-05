@@ -83,6 +83,20 @@ struct PatientFormView: View {
                 TextField("Descreva as alergias", text: $paciente.alergias, axis: .vertical)
             }
 
+            Section {
+                ForEach(ClasseAntibiotico.allCases) { classe in
+                    Toggle(classe.rawValue, isOn: Binding(
+                        get: { paciente.alergiasClasses.contains(classe) },
+                        set: { on in
+                            if on { paciente.alergiasClasses.insert(classe) } else { paciente.alergiasClasses.remove(classe) }
+                        }))
+                }
+            } header: {
+                Text("Alergia por classe de antibiótico")
+            } footer: {
+                Text("Usado para alertar conflitos entre alergia e antimicrobianos/regimes sugeridos.")
+            }
+
             Section("Função renal e hepática") {
                 LabeledOptionalNumberField(titulo: "Creatinina sérica (mg/dL)", valor: $paciente.creatininaSerica)
                 LabeledOptionalNumberField(titulo: "Clearance estimado (mL/min)", valor: $paciente.clearanceEstimado)
@@ -91,6 +105,14 @@ struct PatientFormView: View {
                 }
                 LabeledOptionalNumberField(titulo: "Bilirrubinas (mg/dL)", valor: $paciente.bilirrubinas)
                 TextField("Transaminases (TGO/TGP)", text: $paciente.transaminases)
+            }
+
+            Section {
+                LabeledOptionalNumberField(titulo: "Lactato (mmol/L)", valor: $paciente.lactato)
+            } header: {
+                Text("Perfusão")
+            } footer: {
+                Text("Lactato > 2 mmol/L indica hipoperfusão. Isoladamente NÃO define choque (que exige vasopressor após volume).")
             }
         }
         .navigationTitle(titulo)

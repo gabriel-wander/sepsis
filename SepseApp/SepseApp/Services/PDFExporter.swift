@@ -43,6 +43,13 @@ enum PDFExporter {
             y = desenharLinha(comorb.isEmpty ? "Nenhuma registrada" : comorb, em: y)
             y += 8
 
+            y = desenharSecao("Alergias e perfusão", em: y)
+            let alergiasClasses = paciente.alergiasClasses.map { $0.rawValue }.sorted().joined(separator: ", ")
+            let alergiaTexto = [paciente.alergias, alergiasClasses].filter { !$0.isEmpty }.joined(separator: " · ")
+            y = desenharLinha("Alergias: \(alergiaTexto.isEmpty ? "Nenhuma registrada" : alergiaTexto)", em: y)
+            y = desenharLinha("Lactato: \(paciente.lactato.map { String(format: "%.1f mmol/L", $0) } ?? "—")", em: y)
+            y += 8
+
             y = desenharSecao("Scores registrados", em: y)
             for tipo in TipoScore.allCases {
                 if let m = paciente.ultimaMedicao(de: tipo) {

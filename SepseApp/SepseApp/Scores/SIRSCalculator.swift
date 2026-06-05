@@ -17,8 +17,8 @@ enum SIRSCalculator: ScoreCalculator {
     static func calcular(_ input: Input) -> ScoreResult {
         var componentes: [(String, Int)] = []
 
-        let pTemp = (input.temperatura > 38.5 || input.temperatura < 36.0) ? 1 : 0
-        componentes.append(("Temperatura > 38,5 °C ou < 36 °C", pTemp))
+        let pTemp = (input.temperatura > 38.0 || input.temperatura < 36.0) ? 1 : 0
+        componentes.append(("Temperatura > 38,0 °C ou < 36 °C", pTemp))
 
         let pFC = input.frequenciaCardiaca > 90 ? 1 : 0
         componentes.append(("Frequência cardíaca > 90 bpm", pFC))

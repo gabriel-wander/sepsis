@@ -1,0 +1,46 @@
+name: iOS Build & Test
+
+on:
+  push:
+    branches: [ main, "claude/**" ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+concurrency:
+  group: ios-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-test:
+    name: Build & Test (iOS Simulator)
+    # macos-15 traz Xcode 16, necessário para o projeto (objectVersion 77 / grupos sincronizados).
+    runs-on: macos-15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Xcode version
+        run: xcodebuild -version
+
+      - name: Available iPhone simulators
+        run: xcrun simctl list devices available | grep -i iphone || true
+
+      - name: Build
+        run: |
+          set -o pipefail
+          xcodebuild build \
+            -project SepseApp/SepseApp.xcodeproj \
+            -scheme SepseApp \
+            -destination 'platform=iOS Simulator,name=iPhone 16,OS=latest' \
+            CODE_SIGNING_ALLOWED=NO
+
+      - name: Test
+        run: |
+          set -o pipefail
+          xcodebuild test \
+            -project SepseApp/SepseApp.xcodeproj \
+            -scheme SepseApp \
+            -destination 'platform=iOS Simulator,name=iPhone 16,OS=latest' \
+            CODE_SIGNING_ALLOWED=NO

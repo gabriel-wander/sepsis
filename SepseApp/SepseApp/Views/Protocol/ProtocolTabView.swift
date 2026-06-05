@@ -96,6 +96,7 @@ struct SepsisTimerSection: View {
                     let decorrido = context.date.timeIntervalSince(inicio)
                     HStack {
                         Image(systemName: "timer").foregroundColor(.accentColor)
+                            .accessibilityHidden(true)
                         VStack(alignment: .leading) {
                             Text("Tempo decorrido").font(.caption).foregroundColor(.secondary)
                             Text(formatado(decorrido))
@@ -104,6 +105,9 @@ struct SepsisTimerSection: View {
                         }
                         Spacer()
                     }
+                    // VoiceOver: granularidade de minutos para evitar leitura a cada segundo.
+                    .accessibilityElement(children: .ignore)
+                    .accessibilityLabel("Tempo decorrido desde o reconhecimento: \(Int(decorrido) / 3600) horas e \((Int(decorrido) % 3600) / 60) minutos")
                     Text("Meta de antibiótico: 1 hora").font(.caption).foregroundColor(.secondary)
                 }
             } else {
@@ -146,12 +150,16 @@ struct BundleSection: View {
                             HStack {
                                 Image(systemName: item.concluido ? "checkmark.circle.fill" : "circle")
                                     .foregroundColor(item.concluido ? .green : .secondary)
+                                    .accessibilityHidden(true)
                                 Text(item.titulo)
                                     .foregroundColor(.primary)
                                     .strikethrough(item.concluido)
                                 Spacer()
                             }
                         }
+                        .accessibilityElement(children: .combine)
+                        .accessibilityValue(item.concluido ? "Concluído" : "Pendente")
+                        .accessibilityHint("Toque para alternar")
                     }
                 }
             }
@@ -185,6 +193,7 @@ struct FluxogramaDetailView: View {
                         HStack(alignment: .top, spacing: 10) {
                             Image(systemName: concluidos.contains(passo.id) ? "checkmark.circle.fill" : "circle")
                                 .foregroundColor(concluidos.contains(passo.id) ? .green : .accentColor)
+                                .accessibilityHidden(true)
                             VStack(alignment: .leading, spacing: 4) {
                                 Text("Passo \(idx + 1): \(passo.titulo)")
                                     .font(.headline).foregroundColor(.primary)
@@ -194,6 +203,8 @@ struct FluxogramaDetailView: View {
                             }
                         }
                     }
+                    .accessibilityElement(children: .combine)
+                    .accessibilityValue(concluidos.contains(passo.id) ? "Concluído" : "Pendente")
                 }
             }
         }

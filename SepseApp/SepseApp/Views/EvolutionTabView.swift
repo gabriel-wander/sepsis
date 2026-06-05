@@ -49,6 +49,7 @@ struct EvolutionTabView: View {
                                     Image(systemName: ev.tipo.simbolo)
                                         .foregroundColor(.accentColor)
                                         .frame(width: 24)
+                                        .accessibilityHidden(true)
                                     VStack(alignment: .leading, spacing: 2) {
                                         Text(ev.tipo.rawValue).font(.subheadline.bold())
                                         if !ev.detalhe.isEmpty {
@@ -58,6 +59,7 @@ struct EvolutionTabView: View {
                                             .font(.caption2).foregroundColor(.secondary)
                                     }
                                 }
+                                .accessibilityElement(children: .combine)
                             }
                         }
                     }

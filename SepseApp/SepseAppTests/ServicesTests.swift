@@ -39,7 +39,9 @@ final class ServicesTests: XCTestCase {
         let s = ClassificationAdvisor.sugestao(para: p)
         XCTAssertNotNil(s)
         XCTAssertTrue(s!.localizedCaseInsensitiveContains("vasopressor"))
-        XCTAssertFalse(s!.localizedCaseInsensitiveContains("CHOQUE SÉPTICO"))
+        // Deve apenas ACONSELHAR avaliar choque ("Avaliar choque séptico..."),
+        // não CONCLUIR choque — a conclusão (branch 1) contém "compatíveis com CHOQUE SÉPTICO".
+        XCTAssertFalse(s!.localizedCaseInsensitiveContains("compatíveis"))
     }
 
     func testAdvisor_sepsePorSOFA() {

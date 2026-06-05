@@ -51,10 +51,9 @@ struct ProfileTabView: View {
             // Cabeçalho de gravidade + alertas
             Section {
                 HStack {
-                    SeverityDot(gravidade: paciente.gravidade, diametro: 20)
-                    VStack(alignment: .leading) {
+                    VStack(alignment: .leading, spacing: 6) {
                         Text(paciente.classificacao.rawValue).font(.headline)
-                        Text(paciente.gravidade.rotulo).font(.caption).foregroundColor(.secondary)
+                        GravidadeBadge(gravidade: paciente.gravidade)
                     }
                     Spacer()
                 }

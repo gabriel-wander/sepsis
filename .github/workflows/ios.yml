@@ -1,9 +1,10 @@
 name: iOS Build & Test
 
+# Econômico: runner macOS consome 10x dos minutos de Actions (repo privado).
+# Por isso o CI roda sob demanda (workflow_dispatch) e em push para main —
+# não em cada push de feature branch. Dispare manualmente quando quiser validar.
 on:
   push:
-    branches: [ main, "claude/**" ]
-  pull_request:
     branches: [ main ]
   workflow_dispatch:
 
@@ -14,9 +15,7 @@ concurrency:
 jobs:
   build-test:
     name: Build & Test (iOS Simulator)
-    # macos-15 traz Xcode 16, necessário para o projeto (objectVersion 77 / grupos sincronizados).
     runs-on: macos-15
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -24,19 +23,8 @@ jobs:
       - name: Xcode version
         run: xcodebuild -version
 
-      - name: Available iPhone simulators
-        run: xcrun simctl list devices available | grep -i iphone || true
-
-      - name: Build
-        run: |
-          set -o pipefail
-          xcodebuild build \
-            -project SepseApp/SepseApp.xcodeproj \
-            -scheme SepseApp \
-            -destination 'platform=iOS Simulator,name=iPhone 16,OS=latest' \
-            CODE_SIGNING_ALLOWED=NO
-
-      - name: Test
+      # 'test' já compila o app e os alvos de teste — uma etapa só economiza minutos.
+      - name: Build & Test
         run: |
           set -o pipefail
           xcodebuild test \

@@ -12,12 +12,11 @@ struct MedicationsTabView: View {
     private var paciente: Patient? { store.paciente(comID: pacienteID) }
 
     var body: some View {
-        NavigationStack {
-            List {
-                Section { DisclaimerBanner() }
+        List {
+            Section { DisclaimerBanner() }
 
-                Section {
-                    Label(AppText.fatoresAntimicrobiano, systemImage: "info.circle")
+            Section {
+                Label(AppText.fatoresAntimicrobiano, systemImage: "info.circle")
                         .font(.caption)
                 } header: {
                     Text("Escolha do antimicrobiano")
@@ -75,16 +74,14 @@ struct MedicationsTabView: View {
                     }
                 }
             }
-            .navigationTitle("Medicações")
-            .navigationBarTitleDisplayMode(.inline)
-            .sheet(item: $editandoRegime) { reg in
-                NavigationStack { RegimeEditorView(modo: .editar(reg)) }
-                    .environmentObject(store)
-            }
-            .sheet(isPresented: $criandoRegime) {
-                NavigationStack { RegimeEditorView(modo: .novo) }
-                    .environmentObject(store)
-            }
+        .navigationBarTitleDisplayMode(.inline)
+        .sheet(item: $editandoRegime) { reg in
+            NavigationStack { RegimeEditorView(modo: .editar(reg)) }
+                .environmentObject(store)
+        }
+        .sheet(isPresented: $criandoRegime) {
+            NavigationStack { RegimeEditorView(modo: .novo) }
+                .environmentObject(store)
         }
     }
 

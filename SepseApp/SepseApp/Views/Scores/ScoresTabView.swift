@@ -11,9 +11,8 @@ struct ScoresTabView: View {
     private var paciente: Patient? { store.paciente(comID: pacienteID) }
 
     var body: some View {
-        NavigationStack {
-            Form {
-                Section { DisclaimerBanner() }
+        Form {
+            Section { DisclaimerBanner() }
                 Section {
                     Picker("Score", selection: $tipoSelecionado) {
                         ForEach(TipoScore.allCases) { Text($0.rawValue).tag($0) }
@@ -69,9 +68,7 @@ struct ScoresTabView: View {
                     }
                 }
             }
-            .navigationTitle("Scores")
-            .navigationBarTitleDisplayMode(.inline)
-        }
+        .navigationBarTitleDisplayMode(.inline)
     }
 
     private func maximoEixo(_ tipo: TipoScore) -> Int {

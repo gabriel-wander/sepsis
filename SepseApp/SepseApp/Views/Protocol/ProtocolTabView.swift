@@ -9,10 +9,9 @@ struct ProtocolTabView: View {
     private var paciente: Patient? { store.paciente(comID: pacienteID) }
 
     var body: some View {
-        NavigationStack {
-            List {
-                Section { DisclaimerBanner() }
-                if let p = paciente {
+        List {
+            Section { DisclaimerBanner() }
+            if let p = paciente {
                     AntibioticTimingSection(pacienteID: pacienteID, paciente: p)
                     SepsisTimerSection(pacienteID: pacienteID, reconhecimento: p.reconhecimentoSepse)
                     BundleSection(pacienteID: pacienteID, itens: p.protocoloItens, reconhecimento: p.reconhecimentoSepse)
@@ -35,9 +34,7 @@ struct ProtocolTabView: View {
                     }
                 }
             }
-            .navigationTitle("Protocolo")
-            .navigationBarTitleDisplayMode(.inline)
-        }
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 

@@ -10,10 +10,9 @@ struct EvolutionTabView: View {
     private var paciente: Patient? { store.paciente(comID: pacienteID) }
 
     var body: some View {
-        NavigationStack {
-            List {
-                if let p = paciente {
-                    Section("Evolução dos scores") {
+        List {
+            if let p = paciente {
+                Section("Evolução dos scores") {
                         let tiposComDados = TipoScore.allCases.filter { !p.medicoes(de: $0).isEmpty }
                         if tiposComDados.isEmpty {
                             Text("Nenhum score registrado ainda.")
@@ -65,23 +64,21 @@ struct EvolutionTabView: View {
                     }
                 }
             }
-            .navigationTitle("Evolução")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .primaryAction) {
-                    Button {
-                        mostrandoNovoEvento = true
-                    } label: {
-                        Label("Registrar intervenção", systemImage: "plus")
-                    }
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .primaryAction) {
+                Button {
+                    mostrandoNovoEvento = true
+                } label: {
+                    Label("Registrar intervenção", systemImage: "plus")
                 }
             }
-            .sheet(isPresented: $mostrandoNovoEvento) {
-                NavigationStack {
-                    NewEventView(pacienteID: pacienteID)
-                }
-                .environmentObject(store)
+        }
+        .sheet(isPresented: $mostrandoNovoEvento) {
+            NavigationStack {
+                NewEventView(pacienteID: pacienteID)
             }
+            .environmentObject(store)
         }
     }
 

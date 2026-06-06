@@ -65,6 +65,38 @@ final class SepseAppUITests: XCTestCase {
         XCTAssertTrue(app.tabBars.buttons["Medicações"].exists)
     }
 
+    /// Regressão: alternar entre TODAS as abas não pode derrubar o app.
+    func testAlternarEntreTodasAsAbasNaoQuebra() {
+        let app = XCUIApplication()
+        app.launch()
+
+        let addButton = app.buttons["addPatient"]
+        XCTAssertTrue(addButton.waitForExistence(timeout: 20))
+        addButton.tap()
+        let nameField = app.textFields["patientName"]
+        XCTAssertTrue(nameField.waitForExistence(timeout: 20))
+        nameField.tap()
+        nameField.typeText("Paciente Abas2")
+        app.buttons["savePatient"].tap()
+
+        let cell = app.cells.firstMatch
+        XCTAssertTrue(cell.waitForExistence(timeout: 20))
+        cell.tap()
+
+        XCTAssertTrue(app.tabBars.buttons["Scores"].waitForExistence(timeout: 20))
+
+        // Percorre todas as abas duas vezes; se o app fechar, as asserções seguintes falham.
+        for _ in 0..<2 {
+            for aba in ["Scores", "Protocolo", "Medicações", "Evolução", "Perfil"] {
+                let botao = app.tabBars.buttons[aba]
+                XCTAssertTrue(botao.waitForExistence(timeout: 10), "Aba '\(aba)' sumiu — app pode ter fechado.")
+                botao.tap()
+                XCTAssertTrue(app.tabBars.buttons[aba].waitForExistence(timeout: 10),
+                              "App fechou ao abrir a aba '\(aba)'.")
+            }
+        }
+    }
+
     /// Fluxo: registrar um score e ver o histórico aparecer.
     func testRegistrarScoreCriaHistorico() {
         let app = XCUIApplication()

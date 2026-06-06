@@ -1,10 +1,10 @@
 name: iOS Build & Test
 
-# Econômico: runner macOS consome 10x dos minutos de Actions (repo privado).
-# Por isso o CI roda sob demanda (workflow_dispatch) e em push para main —
-# não em cada push de feature branch. Dispare manualmente quando quiser validar.
+# Repo público: Actions macOS é gratuito/ilimitado, então o CI roda a cada push.
 on:
   push:
+    branches: [ main, "claude/**" ]
+  pull_request:
     branches: [ main ]
   workflow_dispatch:
 

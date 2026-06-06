@@ -1,0 +1,28 @@
+Copyright (c) 2026 gabriel-wander. Todos os direitos reservados.
+
+Este repositório é público apenas para fins de transparência, avaliação,
+pesquisa e desenvolvimento. Nenhuma licença de uso comercial, redistribuição
+ou criação de obras derivadas é concedida por padrão. Para qualquer uso além
+da visualização e avaliação, entre em contato com o proprietário do repositório.
+
+(Caso o proprietário deseje, esta licença pode ser substituída por uma licença
+de código aberto permissiva — por exemplo MIT ou Apache-2.0.)
+
+-------------------------------------------------------------------------------
+AVISO MÉDICO / MEDICAL DISCLAIMER
+
+Este software é uma FERRAMENTA DE APOIO À DECISÃO CLÍNICA destinada a
+profissionais de saúde. NÃO é um dispositivo médico, NÃO realiza diagnóstico
+nem prescrição de forma autônoma e NÃO substitui o julgamento clínico, os
+protocolos locais/CCIH, o antibiograma local nem a equipe assistente.
+
+O software é fornecido "COMO ESTÁ" ("AS IS"), SEM QUALQUER GARANTIA, expressa
+ou implícita, incluindo, sem limitação, garantias de adequação a uma finalidade
+específica. Os autores e o proprietário NÃO se responsabilizam por quaisquer
+danos decorrentes do uso. As condutas devem ser confirmadas com julgamento
+clínico, protocolos locais e a equipe assistente.
+
+O conteúdo clínico baseia-se em Surviving Sepsis Campaign 2021, definições
+Sepsis-3 e atualização de corticosteroides 2024 (ver EVIDENCE_MAP.md), podendo
+exigir adaptação a protocolos locais e atualização conforme novas diretrizes.
+-------------------------------------------------------------------------------

@@ -74,6 +74,7 @@ Selecione o target **SepseApp** e um simulador iOS, então compile e execute (�
 - [`XCODE_GUIDE.md`](XCODE_GUIDE.md) — abrir, compilar (⌘B), rodar (⌘R), testar (⌘U), iPhone.
 - [`RELEASE_CHECKLIST.md`](RELEASE_CHECKLIST.md) — assinatura, ícone, privacidade, TestFlight/App Store.
 - [`CHANGELOG.md`](CHANGELOG.md) — histórico de mudanças.
+- [`LICENSE`](LICENSE) — direitos reservados + aviso médico (apoio à decisão, não dispositivo, sem garantia).
 
 CI: GitHub Actions (`.github/workflows/ios.yml`) compila e roda os testes (unitários + UI) em
 runner macOS/Xcode 16 a cada push.

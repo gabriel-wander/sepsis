@@ -121,19 +121,28 @@ final class SepseAppUITests: XCTestCase {
         XCTAssertTrue(scoresTab.waitForExistence(timeout: 20))
         scoresTab.tap()
 
-        // Rola até o botão de registrar (fica abaixo do cartão de resultado) e toca.
+        // Em um Form, células abaixo da dobra só entram na árvore de acessibilidade
+        // depois de rolar — por isso rolamos ATÉ o botão existir, e só então tocamos.
         let registrar = app.buttons["registrarScore"]
-        XCTAssertTrue(registrar.waitForExistence(timeout: 20))
         var tentativas = 0
-        while !registrar.isHittable && tentativas < 8 {
+        while !registrar.exists && tentativas < 12 {
             app.swipeUp()
             tentativas += 1
         }
+        XCTAssertTrue(registrar.waitForExistence(timeout: 5),
+                      "Botão 'registrarScore' não apareceu após rolar a tela de scores.")
+        if !registrar.isHittable { app.swipeUp() }
         registrar.tap()
 
-        // O histórico passa a existir.
+        // O histórico aparece abaixo do botão; rola até encontrá-lo.
         let pred = NSPredicate(format: "label CONTAINS[c] %@", "histórico")
-        XCTAssertTrue(app.staticTexts.matching(pred).firstMatch.waitForExistence(timeout: 15),
+        let historico = app.staticTexts.matching(pred).firstMatch
+        tentativas = 0
+        while !historico.exists && tentativas < 12 {
+            app.swipeUp()
+            tentativas += 1
+        }
+        XCTAssertTrue(historico.waitForExistence(timeout: 5),
                       "A seção 'Histórico' deveria aparecer após registrar o score.")
     }
 }
